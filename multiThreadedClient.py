@@ -27,7 +27,7 @@ class MultiThreadClient(Thread):
         if(self.service == 1):
             self.echo_server(s)
 
-        elif(self.service == 1):
+        elif(self.service == 2):
             self.palindrome_check_server(s)
 
         elif(self.service == 3):
@@ -36,20 +36,28 @@ class MultiThreadClient(Thread):
 
 
     def echo_server(self,server_soc):
+        self.communication(server_soc)
+        
+    def palindrome_check_server(self,server_soc):
+        self.communication(server_soc)
+        
+    def checkLength_server(self,server_soc):
+        self.communication(server_soc)
+    
+
+
+
+    def communication(self,server_soc):
         print(server_soc.recv(bufsize).decode(scheme))
+        print()
         self.clientSocket.send("[Echo Server ]: Send String > \n".encode(scheme))
 
         string = self.clientSocket.recv(bufsize).decode(scheme)
         server_soc.send(string.encode(scheme))
         message = server_soc.recv(bufsize)
         print(message)
+        print()
         time.sleep(1)
         self.clientSocket.send(str(message).encode(scheme))
         self.clientSocket.close()
-        
-    def palindrome_check_server(self,server_soc):
-        pass
-    def checkLength_server(self,server_soc):
-        pass
-        
     

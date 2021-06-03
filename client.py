@@ -1,3 +1,4 @@
+from sys import flags
 from threading import Thread
 import socket
 import time
@@ -33,3 +34,4 @@ elif option == "3":
     client_communication()
 
 s.close()
+
