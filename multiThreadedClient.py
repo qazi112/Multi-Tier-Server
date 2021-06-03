@@ -21,7 +21,7 @@ class MultiThreadClient(Thread):
         # now become a client of respective server
         s = socket.socket()
         s.connect((self.server[0],int(self.server[1])))
-        print(f"Client Thread : {self.clientSocket} : Connected to server 1 \n")
+        print("Client Thread, Connected to server 1 \n")
         # ==================================================
 
         if(self.service == 1):
@@ -36,8 +36,17 @@ class MultiThreadClient(Thread):
 
 
     def echo_server(self,server_soc):
+        print(server_soc.recv(bufsize).decode(scheme))
+        self.clientSocket.send("[Echo Server ]: Send String > \n".encode(scheme))
+
+        string = self.clientSocket.recv(bufsize).decode(scheme)
+        server_soc.send(string.encode(scheme))
+        message = server_soc.recv(bufsize)
+        print(message)
+        time.sleep(1)
+        self.clientSocket.send(str(message).encode(scheme))
+        self.clientSocket.close()
         
-        pass
     def palindrome_check_server(self,server_soc):
         pass
     def checkLength_server(self,server_soc):

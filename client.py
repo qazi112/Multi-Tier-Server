@@ -1,28 +1,35 @@
 from threading import Thread
 import socket
 import time
-scheme = 'utf-8'
+
 ADDRESS = "127.0.0.1"
 PORT = 5050
+
+scheme = 'utf-8'
 bufsize = 1024
+
 s = socket.socket()
 s.connect((ADDRESS,PORT))
-print("1 -> service 1 , 2 -> service 2 , 3 -> Service 3")
+
+# ==================================================
+def client_communication():
+    print(s.recv(bufsize).decode(scheme))
+    message = input("Write your string > ")
+    s.send(message.encode(scheme))
+    print(s.recv(bufsize).decode(scheme))
+# ===================================================
+
+print("1 -> service 1 Echo , 2 -> service 2 Palindrome, 3 -> Service 3 Length")
 
 option = input("Select Options 1 , 2 , 3")
 
 s.send(option.encode(scheme))
 
 if(option == "1"):
-    print(s.recv(bufsize).decode(scheme))
-    message = input("Write your string > ")
-    s.send(message.encode(scheme))
-    print(s.recv(bufsize).decode(scheme))
+    client_communication()
 elif option == "2":
-    pass
+    client_communication()
 elif option == "3":
-    pass
+    client_communication()
 
-# Starts from Here
-# response = s.recv(bufsize).decode(scheme)
-# print(response)
+s.close()
