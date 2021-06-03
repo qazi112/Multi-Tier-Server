@@ -17,21 +17,30 @@ class MultiThreadClient(Thread):
 
     def run(self):
         print(f"In Threaded Client, and this will connect with : {self.server} \n")
+
         # now become a client of respective server
         s = socket.socket()
         s.connect((self.server[0],int(self.server[1])))
         print(f"Client Thread : {self.clientSocket} : Connected to server 1 \n")
         # ==================================================
-        # ask first client to send his message
-        self.clientSocket.send("Send Your Message".encode(scheme))
-        message = self.clientSocket.recv(bufsize).decode(scheme)  
-        
-        # send this message to server
-          
-        s.send(message.encode(scheme))
-        message = s.recv(bufsize).decode(scheme)
-        s.close()
 
-        self.clientSocket.send(message.encode(scheme))
+        if(self.service == 1):
+            self.echo_server(s)
+
+        elif(self.service == 1):
+            self.palindrome_check_server(s)
+
+        elif(self.service == 3):
+            self.checkLength_server(s)
+
+
+
+    def echo_server(self,server_soc):
+        
+        pass
+    def palindrome_check_server(self,server_soc):
+        pass
+    def checkLength_server(self,server_soc):
+        pass
         
     
